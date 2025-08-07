@@ -3,7 +3,7 @@
 const LEAGUES = [
   'eng.1', 'esp.1', 'ita.1', 'ger.1', 'fra.1',
   'usa.1', 'ned.1', 'por.1', 'eng.2', 'bra.1',
-  'arg.1', 'tur.1', 'rus.1', 'jpn.1', 'kor.1',
+  'arg.copa_lpf', 'tur.1', 'rus.1', 'jpn.1', 'kor.1',
   'mex.1', 'ccl.1', 'uefa.champions', 'uefa.europa', 'uefa.euro',
   'fifa.world', 'conmebol.libertadores', 'nga.1', 'caf.nations',
   'uefa.europa.2', 'afc.cup', 'uefa.super', 'afc.champions', 'club.friendly',
