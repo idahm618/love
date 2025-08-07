@@ -5,9 +5,9 @@ const LEAGUES = [
   'usa.1', 'ned.1', 'por.1', 'eng.2', 'bra.1',
   'arg.1', 'tur.1', 'rus.1', 'jpn.1', 'kor.1',
   'mex.1', 'ccl.1', 'uefa.champions', 'uefa.europa', 'uefa.euro',
-  'fifa.world', 'conmebol.libertadores', 'conmebol.america', 'caf.nations',
-  'aus.1', 'bel.1', 'sco.1', 'gre.1', 'nor.1',
-  'dnk.1', 'swc.1', 'cze.1', 'aut.1',
+  'fifa.world', 'conmebol.libertadores', 'nga.1', 'caf.nations',
+  'uefa.europa.2', 'afc.cup', 'uefa.super', 'afc.champions', 'club.friendly',
+  'idn.1', 'ksa.1', 'saf.1', 'zim.1',
 ];
 
 module.exports = async (req, res) => {
