@@ -2,11 +2,11 @@
 
 const LEAGUES = [
   'eng.1', 'esp.1', 'ita.1', 'ger.1', 'fra.1',
-  'usa.1', 'ned.1', 'por.1', 'eng.2', 'bra.1',
-  'arg.copa_lpf', 'uefa.europa_qual', 'uefa.champions_qual', 'jpn.1', 'kor.1',
-  'mex.1', 'ccl.1', 'uefa.champions', 'uefa.europa', 'uefa.conference_qual',
+  'eng.3', 'ned.1', 'por.1', 'eng.2', 'bra.1',
+  'arg.copa_lpf', 'uefa.europa_qual', 'uefa.champions_qual', 'fifa.worldq.conmebol', 'fifa.worldq.afc',
+  'ind.1', 'uefa.nations', 'uefa.champions', 'uefa.europa', 'uefa.conference_qual',
   'fifa.world', 'conmebol.libertadores', 'nga.1', 'caf.nations',
-  'uefa.europa.conf', 'afc.cup', 'uefa.super', 'afc.champions', 'club.friendly',
+  'uefa.europa.conf', 'afc.cup', 'fifa.Worldq.caf', 'afc.champions', 'club.friendly',
   'idn.1', 'ksa.1', 'saf.1', 'zim.1',
 ];
 
