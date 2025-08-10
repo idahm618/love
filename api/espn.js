@@ -7,7 +7,7 @@ const LEAGUES = [
   'ind.1', 'uefa.nations', 'uefa.champions', 'uefa.europa', 'uefa.conference_qual',
   'fifa.world', 'conmebol.libertadores', 'nga.1', 'caf.nations',
   'uefa.europa.conf', 'afc.cup', 'fifa.Worldq.caf', 'afc.champions', 'club.friendly',
-  'idn.1', 'ksa.1', 'saf.1', 'zim.1',
+  'idn.1', 'ksa.1', 'rsa.1', 'zim.1', 'eng.charity', 'uefa.super_cup', 'esp.joan_gamper', 'usa.1', 'mex.1',
 ];
 
 module.exports = async (req, res) => {
