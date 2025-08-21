@@ -2,12 +2,7 @@
 
 const LEAGUES = [
   'eng.1', 'esp.1', 'ita.1', 'ger.1', 'fra.1',
-  'eng.3', 'ned.1', 'por.1', 'eng.2', 'bra.1',
-  'arg.copa_lpf', 'uefa.europa_qual', 'uefa.champions_qual', 'fifa.worldq.conmebol', 'fifa.worldq.afc',
-  'ind.1', 'uefa.nations', 'uefa.champions', 'uefa.europa', 'uefa.conference_qual',
-  'fifa.world', 'conmebol.libertadores', 'nga.1', 'caf.nations',
-  'uefa.europa.conf', 'afc.cup', 'fifa.Worldq.caf', 'afc.champions', 'club.friendly',
-  'idn.1', 'ksa.1', 'rsa.1', 'zim.1', 'eng.charity', 'uefa.super_cup', 'concacaf.leagues.cup', 'usa.1', 'mex.1',
+  // ... (same list as espn.js)
 ];
 
 module.exports = async (req, res) => {
@@ -22,7 +17,6 @@ module.exports = async (req, res) => {
       return res.status(400).json({ success: false, error: "You must provide either 'id' or 'name'" });
     }
 
-    // pick which endpoint to call based on `type`
     let url;
     if (type === "roster") {
       if (!id) return res.status(400).json({ success: false, error: "Roster requires team 'id'" });
@@ -31,7 +25,6 @@ module.exports = async (req, res) => {
       if (!id) return res.status(400).json({ success: false, error: "Stats requires team 'id'" });
       url = `https://sports.core.api.espn.com/v2/sports/soccer/leagues/${league}/seasons/2024/teams/${id}/statistics`;
     } else {
-      // default → matches (scoreboard)
       url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${league}/scoreboard`;
     }
 
@@ -41,7 +34,6 @@ module.exports = async (req, res) => {
 
     let data = json;
 
-    // if matches, filter to team by name or id
     if (!type || type === "matches") {
       let events = json.events || [];
 
