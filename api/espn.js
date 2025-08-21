@@ -1,4 +1,4 @@
-// Remove: const fetch = require('node-fetch');
+// pages/api/team.js
 
 const LEAGUES = [
   'eng.1', 'esp.1', 'ita.1', 'ger.1', 'fra.1',
@@ -12,45 +12,75 @@ const LEAGUES = [
 
 module.exports = async (req, res) => {
   try {
-    const leagueFilter = req.query.league;
+    const { league, name, id, type } = req.query;
 
-    const fetchLeague = async (leagueId) => {
-      const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${leagueId}/scoreboard`;
-      const response = await fetch(url);  // Use global fetch
-      if (!response.ok) throw new Error(`Failed to fetch ${leagueId}`);
-      return response.json();
-    };
+    if (!league || !LEAGUES.includes(league)) {
+      return res.status(400).json({ success: false, error: "Invalid or missing league param" });
+    }
 
-    const leaguesToFetch = leagueFilter && LEAGUES.includes(leagueFilter)
-      ? [leagueFilter]
-      : LEAGUES;
+    if (!id && !name) {
+      return res.status(400).json({ success: false, error: "You must provide either 'id' or 'name'" });
+    }
 
-    const results = await Promise.allSettled(leaguesToFetch.map(fetchLeague));
+    // pick which endpoint to call based on `type`
+    let url;
+    if (type === "roster") {
+      if (!id) return res.status(400).json({ success: false, error: "Roster requires team 'id'" });
+      url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${league}/teams/${id}/roster`;
+    } else if (type === "stats") {
+      if (!id) return res.status(400).json({ success: false, error: "Stats requires team 'id'" });
+      url = `https://sports.core.api.espn.com/v2/sports/soccer/leagues/${league}/seasons/2024/teams/${id}/statistics`;
+    } else {
+      // default → matches (scoreboard)
+      url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${league}/scoreboard`;
+    }
 
-    const allEvents = results.reduce((acc, result) => {
-      if (result.status === 'fulfilled' && result.value?.events) {
-        acc.push(...result.value.events);
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Failed to fetch ESPN data`);
+    const json = await response.json();
+
+    let data = json;
+
+    // if matches, filter to team by name or id
+    if (!type || type === "matches") {
+      let events = json.events || [];
+
+      if (name) {
+        events = events.filter(event =>
+          event.competitions[0].competitors.some(
+            c => c.team.displayName.toLowerCase() === name.toLowerCase()
+          )
+        );
       }
-      return acc;
-    }, []);
 
-    allEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+      if (id) {
+        events = events.filter(event =>
+          event.competitions[0].competitors.some(
+            c => c.team.id === String(id)
+          )
+        );
+      }
 
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+      data = {
+        success: true,
+        team: name || id || "unknown",
+        league,
+        type: "matches",
+        totalMatches: events.length,
+        events,
+      };
+    }
 
-    if (req.method === 'OPTIONS') {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") {
       res.status(200).end();
       return;
     }
 
-    res.status(200).json({
-      success: true,
-      totalLeagues: leaguesToFetch.length,
-      totalMatches: allEvents.length,
-      events: allEvents,
-    });
+    res.status(200).json(data);
 
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
