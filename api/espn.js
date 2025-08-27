@@ -7,7 +7,7 @@ const LEAGUES = [
   'ind.1', 'uefa.nations', 'uefa.champions', 'uefa.europa', 'uefa.conference_qual',
   'fifa.world', 'conmebol.libertadores', 'nga.1', 'caf.nations',
   'uefa.europa.conf', 'afc.cup', 'fifa.Worldq.caf', 'afc.champions', 'club.friendly',
-  'idn.1', 'ksa.1', 'rsa.1', 'zim.1', 'eng.league.cup', 'uefa.super_cup', 'concacaf.leagues.cup', 'usa.1', 'mex.1',
+  'idn.1', 'ksa.1', 'rsa.1', 'zim.1', 'eng.league_cup', 'uefa.super_cup', 'concacaf.leagues.cup', 'usa.1', 'mex.1',
 ];
 
 const BASE = "https://site.api.espn.com/apis/site/v2/sports/soccer";
