@@ -1,7 +1,7 @@
 // ✅ ESPN Soccer Proxy API
 
 const LEAGUES = [
-  'eng.1', 'esp.1', 'ita.1', 'ger.1', 'fra.1',
+  'eng.1', 'esp.1', 'ita.1', 'ger.1', 'fra.1', 'fifa.worldq.caf' 'fifa.worldq.uefa'
   'eng.3', 'ned.1', 'por.1', 'eng.2', 'bra.1',
   'arg.copa_lpf', 'uefa.europa_qual', 'uefa.champions_qual', 'fifa.worldq.conmebol', 'fifa.worldq.afc',
   'ind.1', 'uefa.nations', 'uefa.champions', 'uefa.europa', 'uefa.conference_qual',
